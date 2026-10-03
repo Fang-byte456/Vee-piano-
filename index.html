@@ -46,7 +46,7 @@ body.landscape-active #panel{visibility:hidden}
 .stage-song-label select{min-width:0;width:100%;max-width:425px;padding:9px 10px;background:#192440;border:1px solid #8594c0;border-radius:9px;color:white;font:inherit;font-size:12px}
 #stageSettingsHost .settings{display:flex;gap:10px;flex-wrap:nowrap;align-items:center}
 #stageSettingsHost .settings label{white-space:nowrap;font-size:12px}
-#stageSettingsHost .settings select{font-size:12px;padding:8px;max-width:190px}
+#stageSettingsHost .settings select{font-size:12px;padding:8px;max-width:210px}
 #stageKeyboardHost{flex:1 1 auto;display:flex;align-items:stretch;min-height:0;width:100%;padding:3px 0 0}
 #landscapeStage #keys{width:100%;max-width:none;height:100%;min-height:100px;align-self:stretch;border-width:5px;border-radius:8px;box-shadow:0 14px 40px #000a}
 #landscapeStage .white{font-size:11px;padding-bottom:12px}
@@ -62,7 +62,7 @@ body.landscape-active #panel{visibility:hidden}
 #stageConsoleHost .song-controls label{margin:0}
 #stageConsoleHost .song-caption{display:none}
 .stage-tip{flex:none;text-align:center;font-size:10px;color:#a9b6d8;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:740px){.stage-subtitle{display:none}.stage-header strong{font-size:12px}.stage-options{gap:5px}.stage-options button{padding:6px}.stage-song-label{gap:3px}.stage-song-label select{max-width:200px}#stageSettingsHost .settings{gap:5px}#stageSettingsHost .settings label{font-size:10px}#stageSettingsHost .settings select{font-size:11px;padding:5px;max-width:135px}#stageConsoleHost .song-controls{gap:4px}#stageConsoleHost .song-controls button{padding:6px}#stageConsoleHost .song-now strong{font-size:11px}}
+@media(max-width:740px){.stage-subtitle{display:none}.stage-header strong{font-size:12px}.stage-options{gap:5px}.stage-options button{padding:6px}.stage-song-label{gap:3px}.stage-song-label select{max-width:200px}#stageSettingsHost .settings{gap:5px}#stageSettingsHost .settings label{font-size:10px}#stageSettingsHost .settings select{font-size:11px;padding:5px;max-width:148px}#stageConsoleHost .song-controls{gap:4px}#stageConsoleHost .song-controls button{padding:6px}#stageConsoleHost .song-now strong{font-size:11px}}
 @media(max-height:530px) and (orientation:landscape){#landscapeStage{gap:4px;padding-top:4px;padding-bottom:4px}.stage-header{min-height:30px}.stage-header button,.stage-options button{min-height:30px;padding:4px 7px}.stage-options{min-height:35px}.stage-song-label select{padding:5px}#stageSettingsHost .settings select{padding:5px}#stageKeyboardHost{padding-top:0}#stageConsoleHost{min-height:54px}#stageConsoleHost .song-controls button{min-height:30px;padding:4px 7px}#stageConsoleHost .song-track{margin:1px 0 0}.stage-tip{font-size:9px}}
 @media(orientation:portrait){body.landscape-active .stage-tip{color:#e4cafe}body.landscape-active .stage-options{flex-wrap:wrap}body.landscape-active #stageSettingsHost{width:100%}body.landscape-active #stageKeyboardHost{min-height:170px}}
 
@@ -73,7 +73,14 @@ body.landscape-active #panel{visibility:hidden}
 .midi-source-card h3{font-size:19px;margin:0 0 9px}.midi-source-card p{line-height:1.6;color:#d5ddf5;font-size:14px}
 .midi-source-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}.midi-source-actions button,.midi-source-actions a{flex:1 1 160px;min-height:44px;text-align:center;display:grid;place-items:center;background:#576fb5;color:white;border:1px solid #a7b7ed87;border-radius:11px;padding:10px;font-size:13px;text-decoration:none}.midi-source-actions .accent{background:#9780d6}
 .midi-source-card .midi-source-note{font-size:12px;color:#b7c3e4}
-</style></head><body><div id="scene"><div id="world"><div class="wall"></div><div class="floor"></div><button class="object" id="piano-object" data-open="piano"><span>🎹 钢琴<br><small>点击弹奏</small></span></button><button class="object" id="orb-object" data-open="orb">✧<br>音律球</button><button class="object" id="lamp-object" data-open="lamp">✦<br>灯光装置</button></div></div><div class="hud"><span class="pill">VEE · MUSIC GALLERY</span><button class="pill" id="resetview">重置视角</button></div><div id="hint">在空白处左右拖动旋转展厅 · 点击物件进入专属视角</div><section id="panel"><div class="paneltop"><button id="back">← 返回展厅</button><h2 id="paneltitle">钢琴</h2></div><div id="pianoView"><div class="piano3d"><div class="case">♫</div></div><div class="landscape-launch"><button class="control" type="button" id="enterLandscape" aria-label="打开横屏钢琴弹奏模式">⛶ 横屏弹奏 · 和我合奏</button><span>平板横过来，整排琴键更好弹；自动演奏与触屏合奏可同时进行。</span></div><div class="settings"><label>音色 <select id="timbre"><option value="sample" selected>原声钢琴（联网音源）</option><option value="piano">拟真钢琴（离线可用）</option><option value="soft">柔和电子琴</option><option value="bright">明亮电子琴</option><option value="pure">纯正弦波</option></select></label><label>八度 <select id="octave"><option value="3">C3–B4</option><option value="4" selected>C4–B5</option><option value="5">C5–B6</option></select></label></div><div id="keys"></div><div class="song-studio" id="songStudio">
+</style></head><body><div id="scene"><div id="world"><div class="wall"></div><div class="floor"></div><button class="object" id="piano-object" data-open="piano"><span>🎹 钢琴<br><small>点击弹奏</small></span></button><button class="object" id="orb-object" data-open="orb">✧<br>音律球</button><button class="object" id="lamp-object" data-open="lamp">✦<br>灯光装置</button></div></div><div class="hud"><span class="pill">VEE · MUSIC GALLERY</span><button class="pill" id="resetview">重置视角</button></div><div id="hint">在空白处左右拖动旋转展厅 · 点击物件进入专属视角</div><section id="panel"><div class="paneltop"><button id="back">← 返回展厅</button><h2 id="paneltitle">钢琴</h2></div><div id="pianoView"><div class="piano3d"><div class="case">♫</div></div><div class="landscape-launch"><button class="control" type="button" id="enterLandscape" aria-label="打开横屏钢琴弹奏模式">⛶ 横屏弹奏 · 和我合奏</button><span>平板横过来，整排琴键更好弹；自动演奏与触屏合奏可同时进行。</span></div><div class="settings"><label>乐器 <select id="timbre" aria-label="选择演奏乐器">
+<optgroup label="钢琴与电子">
+<option value="sample" selected>原声钢琴（采样）</option><option value="piano">钢琴（离线拟音）</option><option value="musicbox">八音盒 · 拟音</option><option value="soft">柔和电子琴</option><option value="bright">明亮电子琴</option><option value="pure">纯正弦波</option>
+</optgroup><optgroup label="中国传统乐器 · 离线拟音">
+<option value="guzheng">古筝 · 拨弦拟音</option><option value="pipa">琵琶 · 拨弦拟音</option><option value="erhu">二胡 · 拉弦拟音</option>
+</optgroup><optgroup label="西洋乐器 · 采样优先">
+<option value="guitar">古典吉他 · 尼龙弦</option><option value="violin">小提琴 · 拉弦</option><option value="cello">大提琴 · 拉弦</option><option value="flute">长笛 · 气鸣</option><option value="harp">竖琴 · 拨弦</option>
+</optgroup></select></label><label>八度 <select id="octave"><option value="3">C3–B4</option><option value="4" selected>C4–B5</option><option value="5">C5–B6</option></select></label></div><div id="keys"></div><div class="song-studio" id="songStudio">
   <div class="song-heading"><h3>♫ 曲目演奏 · Piano Player</h3><span class="song-hint">点选曲目，琴键同步演奏</span></div>
   <input class="song-search" id="songSearch" type="search" placeholder="搜索曲名 / 作曲家 / Vee 原创" aria-label="搜索钢琴曲目">
   <div class="midi-strip"><button id="importMidiBtn" type="button">＋ 导入我的 MIDI</button><small>《爱乐之城》每首试听最多 1 分钟 · 导入后尝试保存在本机浏览器</small><input id="midiFiles" type="file" accept=".mid,.midi,audio/midi,audio/x-midi" multiple hidden></div>
@@ -87,14 +94,14 @@ body.landscape-active #panel{visibility:hidden}
       <button id="loopPlayback" aria-pressed="false" title="循环播放">⇄ 循环</button>
       <label>速度 <select id="playbackSpeed" aria-label="演奏速度"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
     </div>
-    <p class="song-caption">经典曲目为本展厅简编。爱乐之城的曲名已预留；需导入你拥有的 MIDI 后才能播放原曲的一分钟。原声钢琴采用可授权使用的钢琴采样，联网失败会自动切换离线拟真音色。</p>
+    <p class="song-caption">经典曲目为本展厅简编；爱乐之城原曲需导入你拥有的 MIDI 后播放。乐器可切换：拨弦、拉弦与气鸣音色各有不同；开放采样加载失败时自动启用离线拟音。</p>
   </div>
-</div><p class="sample-credit">钢琴采样：Alexander Holm，Salamander Grand Piano V3，CC BY 3.0 · https://creativecommons.org/licenses/by/3.0/ · https://tonejs.github.io/audio/salamander/</p><p class="foot">支持多指弹奏 · 按下琴键即发声 · 十二平均律 A4 = 440 Hz</p></div><div id="orbView" hidden><div class="orb" id="orb"></div><p class="foot">点击音律球，触发声音与脉动</p><div class="settings"><button class="control" id="orbPlay">✧ 触发音律</button></div></div><div id="lampView" hidden><div class="lamp" id="lamp"></div><p class="foot">点击按钮，切换展厅灯光</p><div class="settings"><button class="control" id="lampToggle">开 / 关</button></div></div></section>
+</div><p class="sample-credit" id="instrumentStatus" aria-live="polite">乐器切换适用于手弹和自动演奏。古筝、琵琶、二胡为离线拟音；吉他、小提琴、大提琴、长笛、竖琴优先载入开放采样，联网不可用时自动使用离线拟音。</p><p class="sample-credit">钢琴采样：Alexander Holm，Salamander Grand Piano V3，CC BY 3.0；其他采样：FluidR3 GM / MIDI.js Soundfonts，CC BY 3.0。<a href="https://github.com/gleitz/midi-js-soundfonts" target="_blank" rel="noopener noreferrer" style="color:#d7b8ff">采样来源与授权</a></p><p class="foot">支持多指弹奏 · 按下琴键即发声 · 十二平均律 A4 = 440 Hz</p></div><div id="orbView" hidden><div class="orb" id="orb"></div><p class="foot">点击音律球，触发声音与脉动</p><div class="settings"><button class="control" id="orbPlay">✧ 触发音律</button></div></div><div id="lampView" hidden><div class="lamp" id="lamp"></div><p class="foot">点击按钮，切换展厅灯光</p><div class="settings"><button class="control" id="lampToggle">开 / 关</button></div></div></section>
 <!-- 横屏合奏舞台：复用原钢琴的真实琴键和播放控制，保证状态及动画一致 -->
 <section id="landscapeStage" aria-hidden="true" aria-label="横屏钢琴合奏模式">
   <div class="stage-header">
     <button id="leaveLandscape" type="button" aria-label="退出横屏模式">← 返回展厅</button>
-    <strong>VEE · PIANO <span class="stage-subtitle">和哥哥一起弹</span></strong>
+    <strong>VEE · MUSIC <span class="stage-subtitle">和哥哥一起弹</span></strong>
     <button id="stageFullscreen" type="button" title="尝试开启全屏显示">⛶ 全屏</button>
   </div>
   <div class="stage-options">
@@ -106,32 +113,153 @@ body.landscape-active #panel{visibility:hidden}
   </div>
   <div id="stageKeyboardHost" aria-label="横屏钢琴琴键"></div>
   <div id="stageConsoleHost"></div>
-  <div class="stage-tip">可多指同时弹奏 · 自动演奏时，亮起的琴键是哥哥弹的 · 请将平板横过来</div>
+  <div class="stage-tip" id="stageInstrumentTip">可多指同时弹奏 · 自动演奏时，亮起的琴键是哥哥弹的 · 请将平板横过来</div>
 </section>
 
 <div id="midiSourceSheet" role="dialog" aria-modal="true" aria-labelledby="midiSourceTitle" aria-hidden="true"><div class="midi-source-card"><h3 id="midiSourceTitle">获取钢琴 MIDI</h3><p id="midiSourceDescription">先从原始发布页面获取 MIDI 文件，再回来选择文件即可播放。</p><div class="midi-source-actions"><a id="midiSourceLink" target="_blank" rel="noopener noreferrer">① 打开 MIDI 来源</a><button id="midiSourcePick" class="accent" type="button">② 已下载，选择文件</button><button id="midiSourceClose" type="button">返回钢琴</button></div><p class="midi-source-note">下载可能需要原站登录或积分。导入后的乐曲只保存在当前浏览器，不会上传到公开的 GitHub 网站。</p></div></div>
 <script>
 const world=document.getElementById('world');let yaw=-22,pitch=15,drag=null;function orient(){world.style.transform=`translate(-50%,-50%) rotateX(${pitch}deg) rotateY(${yaw}deg)`}document.getElementById('scene').addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={id:e.pointerId,x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)});document.getElementById('scene').addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;yaw+=(e.clientX-drag.x)*.3;pitch=Math.max(-5,Math.min(45,pitch-(e.clientY-drag.y)*.15));drag.x=e.clientX;drag.y=e.clientY;orient()});document.getElementById('scene').addEventListener('pointerup',()=>drag=null);document.getElementById('resetview').onclick=()=>{yaw=-22;pitch=15;orient()};
 const panel=document.getElementById('panel'),views={piano:document.getElementById('pianoView'),orb:document.getElementById('orbView'),lamp:document.getElementById('lampView')};document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{let v=b.dataset.open;panel.classList.add('active');Object.entries(views).forEach(([k,el])=>el.hidden=k!==v);document.getElementById('paneltitle').textContent={piano:'🎹 钢琴视角',orb:'✧ 音律球',lamp:'✦ 灯光装置'}[v]});document.getElementById('back').onclick=()=>{panel.classList.remove('active');stopPerformance();stopAll()};
-let ctx,active=new Map();
+let ctx,active=new Map(),soundMaster=null;
+const timbreInput=document.getElementById('timbre'),instrumentStatus=document.getElementById('instrumentStatus');
 const pianoSamples=new Map(),sampleKeys=[['C2',36],['Ds2',39],['Fs2',42],['A2',45],['C3',48],['Ds3',51],['Fs3',54],['A3',57],['C4',60],['Ds4',63],['Fs4',66],['A4',69],['C5',72],['Ds5',75],['Fs5',78],['A5',81],['C6',84],['Ds6',87],['Fs6',90],['A6',93]];
 let pianoLoading=false;
 function loadPianoSamples(){if(pianoLoading||!ctx)return;pianoLoading=true;for(const [name,midi] of sampleKeys){fetch('https://tonejs.github.io/audio/salamander/'+name+'.mp3').then(r=>{if(!r.ok)throw Error('sample unavailable');return r.arrayBuffer()}).then(b=>ctx.decodeAudioData(b)).then(b=>pianoSamples.set(midi,b)).catch(()=>{});}}
-function audio(){ctx??=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume();if(document.getElementById('timbre').value==='sample')loadPianoSamples();return ctx}
+const soundfontNames={guitar:'acoustic_guitar_nylon',violin:'violin',cello:'cello',flute:'flute',harp:'orchestral_harp'};
+const fontLoaders=new Map(),fontBuffers=new Map(),fontPending=new Map();
+function showInstrumentInfo(message){if(instrumentStatus)instrumentStatus.textContent=message;const tip=document.getElementById('stageInstrumentTip');if(tip)tip.textContent=message+' · 和哥哥合奏时仍可自己按琴键';}
+function audio(){
+ if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();soundMaster=ctx.createDynamicsCompressor();soundMaster.threshold.value=-14;soundMaster.knee.value=17;soundMaster.ratio.value=3;soundMaster.attack.value=.006;soundMaster.release.value=.2;soundMaster.connect(ctx.destination);}
+ if(ctx.state==='suspended')ctx.resume().catch(()=>{});
+ if(timbreInput.value==='sample')loadPianoSamples();
+ return ctx;
+}
 function frequency(midi){return 440*Math.pow(2,(midi-69)/12)}
 function nearestSample(midi){let near=null,dist=100;for(const k of pianoSamples.keys()){const d=Math.abs(k-midi);if(d<dist){dist=d;near=k}}return near!==null&&dist<=6?near:null}
-function noteOn(id,midi,velocity=92){if(active.has(id))return;const ac=audio(),t=ac.currentTime,kind=document.getElementById('timbre').value;let gain=ac.createGain(),nodes=[];
-const vol=Math.max(.08,Math.min(1,velocity/127));gain.gain.setValueAtTime(.0001,t);gain.connect(ac.destination);
-if(kind==='sample'&&nearestSample(midi)!==null){let n=nearestSample(midi),source=ac.createBufferSource();source.buffer=pianoSamples.get(n);source.playbackRate.value=Math.pow(2,(midi-n)/12);source.connect(gain);gain.gain.exponentialRampToValueAtTime(Math.max(.0002,.62*vol),t+.012);source.start(t);nodes.push(source)}
-else if(kind==='piano'||kind==='sample'){
- /* 离线钢琴拟声：逐渐消失的高次泛音 + 轻微走音，避免纯电子琴听感 */
+function fontNoteMidi(name){const m=/^([A-G])([#b]?)(-?\d+)$/.exec(name);if(!m)return null;return (Number(m[3])+1)*12+({C:0,D:2,E:4,F:5,G:7,A:9,B:11}[m[1]])+(m[2]==='#'?1:m[2]==='b'?-1:0);}
+function fontData(kind){return window.MIDI?.Soundfont?.[soundfontNames[kind]]||null;}
+function nearestFontNote(kind,midi){const list=fontData(kind);if(!list)return null;let best=null,dist=100;for(const key of Object.keys(list)){let n=fontNoteMidi(key);if(n===null)continue;const d=Math.abs(n-midi);if(d<dist){best={key,midi:n};dist=d}}return dist<=5?best:null;}
+function primeFont(kind){const map=fontBuffers.get(kind)||new Map();fontBuffers.set(kind,map);const wanted=[48,52,55,60,64,67,72,76,79,84,88];return Promise.all(wanted.map(n=>decodeFontNote(kind,n))).then(()=>{if(timbreInput.value===kind)showInstrumentInfo('✓ '+timbreInput.selectedOptions[0].text+' 采样已就绪；离线时仍有拟音备用。')});}
+function loadSoundfont(kind){
+ if(!soundfontNames[kind])return Promise.resolve(false);
+ if(fontData(kind))return primeFont(kind).then(()=>true);
+ if(fontLoaders.has(kind))return fontLoaders.get(kind);
+ window.MIDI=window.MIDI||{};window.MIDI.Soundfont=window.MIDI.Soundfont||{};
+ showInstrumentInfo('正在加载 '+timbreInput.selectedOptions[0].text+' 的采样，期间可以先听离线拟音……');
+ const promise=new Promise(resolve=>{
+  const script=document.createElement('script');script.async=true;
+  script.src='https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/'+soundfontNames[kind]+'-mp3.js';
+  script.onload=()=>{if(fontData(kind)){primeFont(kind).then(()=>resolve(true)).catch(()=>resolve(false))}else resolve(false)};
+  script.onerror=()=>resolve(false);
+  document.head.appendChild(script);
+ }).then(ok=>{if(!ok&&timbreInput.value===kind)showInstrumentInfo('采样暂时无法加载，已自动启用 '+timbreInput.selectedOptions[0].text+' 的离线拟音。');return ok});
+ fontLoaders.set(kind,promise);return promise;
+}
+function decodeFontNote(kind,midi){
+ const found=nearestFontNote(kind,midi);if(!found)return Promise.resolve(null);
+ let buffers=fontBuffers.get(kind);if(!buffers){buffers=new Map();fontBuffers.set(kind,buffers)}
+ if(buffers.has(found.midi))return Promise.resolve(buffers.get(found.midi));
+ const pk=kind+':'+found.midi;if(fontPending.has(pk))return fontPending.get(pk);
+ const data=fontData(kind)[found.key];if(typeof data!=='string'||!data.includes('base64,'))return Promise.resolve(null);
+ const promise=Promise.resolve().then(()=>{
+  const binary=atob(data.slice(data.indexOf('base64,')+7));const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+  return audio().decodeAudioData(bytes.buffer);
+ }).then(decoded=>{buffers.set(found.midi,decoded);fontPending.delete(pk);return decoded}).catch(()=>{fontPending.delete(pk);return null});
+ fontPending.set(pk,promise);return promise;
+}
+function cachedFontNote(kind,midi){const found=nearestFontNote(kind,midi);if(!found)return null;const buffer=fontBuffers.get(kind)?.get(found.midi);if(!buffer){decodeFontNote(kind,midi);return null}return {...found,buffer};}
+const pluckedBuffers=new Map();
+function pluckBuffer(ac,kind,midi){
+ const id=kind+':'+midi+':'+ac.sampleRate;if(pluckedBuffers.has(id))return pluckedBuffers.get(id);
+ const sr=ac.sampleRate, hz=frequency(midi), n=Math.max(7,Math.round(sr/hz));
+ const duration={guzheng:3.3,pipa:2.05,guitar:2.65,harp:3.7,musicbox:3.1}[kind]||2.6;
+ const out=ac.createBuffer(1,Math.floor(sr*duration),sr),a=out.getChannelData(0),delay=new Float32Array(n);
+ let seed=((midi+13)*0x9e3779b1)>>>0,previous=0;
+ const brightness={guzheng:.75,pipa:.91,guitar:.37,harp:.5,musicbox:.35}[kind]||.6;
+ for(let i=0;i<n;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;let noise=(seed/4294967296)*2-1;previous=previous*(1-brightness)+noise*brightness;delay[i]=previous*.68;}
+ let pos=0,feedback={guzheng:.9978,pipa:.995,guitar:.9965,harp:.9987,musicbox:.999}[kind]||.997;
+ const tail=kind==='pipa'?1.5:kind==='guitar'?2.4:kind==='harp'?4.3:3.1;
+ for(let i=0;i<a.length;i++){
+  const x=delay[pos],next=delay[(pos+1)%n];delay[pos]=(x+next)*.5*feedback;pos++;if(pos===n)pos=0;
+  const sec=i/sr,envelope=Math.exp(-sec/tail),body=Math.sin(2*Math.PI*hz*sec);
+  const ping=kind==='musicbox'?(.25*Math.sin(2*Math.PI*hz*2.01*sec)*Math.exp(-sec/.7)):(kind==='guzheng'?.11*body*Math.exp(-sec/1.8):.05*body*Math.exp(-sec/.75));
+  const tick=kind==='pipa'?Math.exp(-sec*700)*.13:(kind==='guitar'?Math.exp(-sec*470)*.036:0);
+  a[i]=(x*.66*envelope)+ping+tick;
+ }
+ pluckedBuffers.set(id,out);return out;
+}
+function makePlucked(ac,kind,midi,t,vol,gain,nodes){
+ const src=ac.createBufferSource();src.buffer=pluckBuffer(ac,kind,midi);src.connect(gain);gain.gain.exponentialRampToValueAtTime(Math.max(.0002,.72*vol),t+.007);src.start(t);nodes.push(src);
+ return {release:kind==='pipa'?.27:.4,stopDelay:1.55};
+}
+function makeBowed(ac,kind,midi,t,vol,gain,nodes){
+ const hz=frequency(midi),base=ac.createOscillator(),upper=ac.createOscillator(),blend=ac.createGain(),upGain=ac.createGain(),filter=ac.createBiquadFilter();
+ base.type=kind==='erhu'?'sawtooth':'sawtooth';upper.type='triangle';
+ base.frequency.setValueAtTime(hz*(kind==='erhu'?.987:.995),t);base.frequency.exponentialRampToValueAtTime(hz,t+.13);
+ upper.frequency.setValueAtTime(hz*2,t);
+ blend.gain.value=kind==='erhu'?.5:.55;upGain.gain.value=kind==='erhu'?.085:.16;
+ const vibrato=ac.createOscillator(),depth=ac.createGain();vibrato.frequency.value=kind==='erhu'?5.7:5.1;depth.gain.value=hz*(kind==='erhu'?.008:.0042);
+ vibrato.connect(depth);depth.connect(base.frequency);depth.connect(upper.frequency);
+ filter.type='lowpass';filter.frequency.value=kind==='cello'?2100:kind==='erhu'?2400:3200;filter.Q.value=.85;
+ base.connect(blend);upper.connect(upGain);blend.connect(filter);upGain.connect(filter);filter.connect(gain);
+ gain.gain.exponentialRampToValueAtTime(Math.max(.0002,(kind==='erhu'?.13:.19)*vol),t+.1);
+ base.start(t);upper.start(t);vibrato.start(t);nodes.push(base,upper,vibrato);
+ return {release:kind==='cello'?.19:.16,stopDelay:.85};
+}
+function makeWind(ac,kind,midi,t,vol,gain,nodes){
+ const hz=frequency(midi),body=ac.createOscillator(),air=ac.createOscillator(),airGain=ac.createGain();
+ body.type='sine';body.frequency.setValueAtTime(hz*.998,t);body.frequency.exponentialRampToValueAtTime(hz,t+.06);
+ air.type='triangle';air.frequency.value=hz*2;airGain.gain.value=.09;air.connect(airGain);airGain.connect(gain);body.connect(gain);
+ const vibrato=ac.createOscillator(),depth=ac.createGain();vibrato.frequency.value=5.2;depth.gain.value=hz*.0028;vibrato.connect(depth);depth.connect(body.frequency);
+ gain.gain.exponentialRampToValueAtTime(Math.max(.0002,.26*vol),t+.08);body.start(t);air.start(t);vibrato.start(t);nodes.push(body,air,vibrato);
+ return {release:.17,stopDelay:.7};
+}
+function makePianoSynth(ac,midi,t,vol,gain,nodes){
  const harmonics=[[1,.53],[2,.17],[3,.077],[4,.034],[5,.015]];
- for(let i=0;i<harmonics.length;i++){const [h,amp]=harmonics[i],osc=ac.createOscillator(),g=ac.createGain();osc.type='sine';osc.frequency.value=frequency(midi)*h*(1+(.000055*i*i));g.gain.setValueAtTime(Math.max(.00001,amp*vol),t);g.gain.exponentialRampToValueAtTime(.00001,t+(i===0?4.8:Math.max(.28,2.1-i*.36)));osc.connect(g);g.connect(gain);osc.start(t);nodes.push(osc)}
- gain.gain.exponentialRampToValueAtTime(.67,t+.009);
-}else{let osc=ac.createOscillator();osc.type=kind==='pure'?'sine':kind==='bright'?'sawtooth':'triangle';osc.frequency.setValueAtTime(frequency(midi),t);osc.connect(gain);gain.gain.exponentialRampToValueAtTime(kind==='bright'?.065:.11,t+.025);osc.start(t);nodes.push(osc)}
-active.set(id,{nodes,gain,midi});document.querySelectorAll(`[data-midi="${midi}"]`).forEach(el=>el.classList.add('pressed'))}
-function noteOff(id,midi){const n=active.get(id);if(!n)return;let t=ctx.currentTime;n.gain.gain.cancelScheduledValues(t);n.gain.gain.setTargetAtTime(.0001,t,.09);for(const o of n.nodes){try{o.stop(t+.43)}catch(e){}}active.delete(id);document.querySelectorAll(`[data-midi="${midi}"]`).forEach(el=>el.classList.toggle('pressed',[...active.values()].some(n=>n.midi===midi)))}
-function stopAll(){for(const [id,n] of active){let t=ctx.currentTime;n.gain.gain.cancelScheduledValues(t);n.gain.gain.setTargetAtTime(.0001,t,.03);for(const o of n.nodes){try{o.stop(t+.2)}catch(e){}}}active.clear();document.querySelectorAll('.pressed').forEach(el=>el.classList.remove('pressed'))}
+ for(let i=0;i<harmonics.length;i++){
+  const [h,amp]=harmonics[i],osc=ac.createOscillator(),g=ac.createGain();osc.type='sine';osc.frequency.value=frequency(midi)*h*(1+(.000055*i*i));
+  g.gain.setValueAtTime(Math.max(.00001,amp*vol),t);g.gain.exponentialRampToValueAtTime(.00001,t+(i===0?4.8:Math.max(.28,2.1-i*.36)));
+  osc.connect(g);g.connect(gain);osc.start(t);nodes.push(osc);
+ }
+ gain.gain.exponentialRampToValueAtTime(.67,t+.009);return {release:.09,stopDelay:.43};
+}
+function noteOn(id,midi,velocity=92){
+ if(active.has(id))return;
+ const ac=audio(),t=ac.currentTime,kind=timbreInput.value,vol=Math.max(.08,Math.min(1,velocity/127)),gain=ac.createGain(),nodes=[];
+ let envelope={release:.09,stopDelay:.43};gain.gain.setValueAtTime(.0001,t);gain.connect(soundMaster);
+ if(kind==='sample'&&nearestSample(midi)!==null){
+  const n=nearestSample(midi),src=ac.createBufferSource();src.buffer=pianoSamples.get(n);src.playbackRate.value=Math.pow(2,(midi-n)/12);src.connect(gain);
+  gain.gain.exponentialRampToValueAtTime(Math.max(.0002,.62*vol),t+.012);src.start(t);nodes.push(src);
+ }else if(soundfontNames[kind]&&cachedFontNote(kind,midi)){
+  const note=cachedFontNote(kind,midi),src=ac.createBufferSource();src.buffer=note.buffer;src.playbackRate.value=Math.pow(2,(midi-note.midi)/12);src.connect(gain);
+  gain.gain.exponentialRampToValueAtTime(Math.max(.0002,.7*vol),t+(kind==='violin'||kind==='cello'?.047:.009));src.start(t);nodes.push(src);
+  envelope={release:kind==='violin'||kind==='cello'?.19:.3,stopDelay:1.5};
+ }else if(['guzheng','pipa','guitar','harp','musicbox'].includes(kind)){
+  envelope=makePlucked(ac,kind,midi,t,vol,gain,nodes);
+ }else if(['violin','cello','erhu'].includes(kind)){
+  envelope=makeBowed(ac,kind,midi,t,vol,gain,nodes);
+ }else if(kind==='flute'){
+  envelope=makeWind(ac,kind,midi,t,vol,gain,nodes);
+ }else if(kind==='piano'||kind==='sample'){
+  envelope=makePianoSynth(ac,midi,t,vol,gain,nodes);
+ }else{
+  const osc=ac.createOscillator();osc.type=kind==='pure'?'sine':kind==='bright'?'sawtooth':'triangle';osc.frequency.setValueAtTime(frequency(midi),t);osc.connect(gain);
+  gain.gain.exponentialRampToValueAtTime(kind==='bright'?.065:.11,t+.025);osc.start(t);nodes.push(osc);
+ }
+ active.set(id,{nodes,gain,midi,...envelope});document.querySelectorAll(`[data-midi="${midi}"]`).forEach(el=>el.classList.add('pressed'));
+}
+function releaseVoice(n,t,fast=false){
+ n.gain.gain.cancelScheduledValues(t);n.gain.gain.setTargetAtTime(.0001,t,fast?.028:n.release);
+ for(const node of n.nodes){try{node.stop(t+(fast?.19:n.stopDelay))}catch(e){}}
+}
+function noteOff(id,midi){const n=active.get(id);if(!n)return;releaseVoice(n,ctx.currentTime);active.delete(id);document.querySelectorAll(`[data-midi="${midi}"]`).forEach(el=>el.classList.toggle('pressed',[...active.values()].some(v=>v.midi===midi)))}
+function stopAll(){for(const n of active.values())releaseVoice(n,ctx.currentTime,true);active.clear();document.querySelectorAll('.pressed').forEach(el=>el.classList.remove('pressed'))}
+timbreInput.addEventListener('change',()=>{
+ const name=timbreInput.selectedOptions[0].text,kind=timbreInput.value;
+ showInstrumentInfo('已切换：'+name+'。手动琴键和自动演奏会使用同一种音色。');
+ if(soundfontNames[kind]){audio();loadSoundfont(kind)}else if(kind==='sample'){audio();loadPianoSamples()}
+});
 const keys=document.getElementById('keys'),whiteNotes=[0,2,4,5,7,9,11],blackAfter=[0,1,3,4,5];function buildKeys(){stopAll();keys.replaceChildren();const base=Number(document.getElementById('octave').value)*12+12,stage=document.body.classList.contains('landscape-active'),octaves=stage?3:2,blackWidth=stage?3.7:7.4;keys.style.setProperty('--black-width',blackWidth+'%');for(let o=0;o<octaves;o++)for(let i=0;i<7;i++){let midi=base+o*12+whiteNotes[i],b=document.createElement('div');b.className='white';b.dataset.midi=midi;b.textContent=['C','D','E','F','G','A','B'][i]+(Number(document.getElementById('octave').value)+o);keys.append(b)}for(let o=0;o<octaves;o++)for(let i of blackAfter){let midi=base+o*12+whiteNotes[i]+1,b=document.createElement('div');b.className='black';b.dataset.midi=midi;b.style.left=`${((o*7+i+1)/(octaves*7))*100-blackWidth/2}%`;keys.append(b)}}buildKeys();document.getElementById('octave').onchange=()=>{stopPerformance();buildKeys()};const pointerNotes=new Map();keys.addEventListener('pointerdown',e=>{let key=e.target.closest('[data-midi]');if(!key)return;e.preventDefault();keys.setPointerCapture(e.pointerId);let midi=+key.dataset.midi;pointerNotes.set(e.pointerId,midi);noteOn('p'+e.pointerId,midi)});keys.addEventListener('pointermove',e=>{if(!pointerNotes.has(e.pointerId))return;let el=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-midi]');if(!el)return;let old=pointerNotes.get(e.pointerId),next=+el.dataset.midi;if(old!==next){noteOff('p'+e.pointerId,old);noteOn('p'+e.pointerId,next);pointerNotes.set(e.pointerId,next)}});function release(e){if(!pointerNotes.has(e.pointerId))return;noteOff('p'+e.pointerId,pointerNotes.get(e.pointerId));pointerNotes.delete(e.pointerId)}keys.addEventListener('pointerup',release);keys.addEventListener('pointercancel',release);keys.addEventListener('lostpointercapture',release);
 function pluck(midi){const id='effect'+Math.random();noteOn(id,midi);setTimeout(()=>noteOff(id,midi),300)}document.getElementById('orbPlay').onclick=()=>{document.getElementById('orb').classList.add('play');[72,76,79,84].forEach((n,i)=>setTimeout(()=>pluck(n),i*125));setTimeout(()=>document.getElementById('orb').classList.remove('play'),1100)};document.getElementById('orb').onclick=document.getElementById('orbPlay').onclick;document.getElementById('lampToggle').onclick=()=>document.getElementById('lamp').classList.toggle('off');document.getElementById('lamp').onclick=document.getElementById('lampToggle').onclick;
 
