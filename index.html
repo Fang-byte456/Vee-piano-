@@ -65,6 +65,14 @@ body.landscape-active #panel{visibility:hidden}
 @media(max-width:740px){.stage-subtitle{display:none}.stage-header strong{font-size:12px}.stage-options{gap:5px}.stage-options button{padding:6px}.stage-song-label{gap:3px}.stage-song-label select{max-width:200px}#stageSettingsHost .settings{gap:5px}#stageSettingsHost .settings label{font-size:10px}#stageSettingsHost .settings select{font-size:11px;padding:5px;max-width:135px}#stageConsoleHost .song-controls{gap:4px}#stageConsoleHost .song-controls button{padding:6px}#stageConsoleHost .song-now strong{font-size:11px}}
 @media(max-height:530px) and (orientation:landscape){#landscapeStage{gap:4px;padding-top:4px;padding-bottom:4px}.stage-header{min-height:30px}.stage-header button,.stage-options button{min-height:30px;padding:4px 7px}.stage-options{min-height:35px}.stage-song-label select{padding:5px}#stageSettingsHost .settings select{padding:5px}#stageKeyboardHost{padding-top:0}#stageConsoleHost{min-height:54px}#stageConsoleHost .song-controls button{min-height:30px;padding:4px 7px}#stageConsoleHost .song-track{margin:1px 0 0}.stage-tip{font-size:9px}}
 @media(orientation:portrait){body.landscape-active .stage-tip{color:#e4cafe}body.landscape-active .stage-options{flex-wrap:wrap}body.landscape-active #stageSettingsHost{width:100%}body.landscape-active #stageKeyboardHost{min-height:170px}}
+
+/* 获取授权 MIDI 的帮助面板；文件仅导入本机浏览器。 */
+#midiSourceSheet{display:none;position:fixed;inset:0;z-index:1000;background:#080d20c9;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}
+#midiSourceSheet.open{display:flex}
+.midi-source-card{width:min(100%,450px);max-height:90dvh;overflow:auto;background:linear-gradient(150deg,#303f69,#10182e);color:#f6f7ff;border:1px solid #9baeea80;border-radius:20px;padding:22px;box-shadow:0 24px 90px #000a}
+.midi-source-card h3{font-size:19px;margin:0 0 9px}.midi-source-card p{line-height:1.6;color:#d5ddf5;font-size:14px}
+.midi-source-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}.midi-source-actions button,.midi-source-actions a{flex:1 1 160px;min-height:44px;text-align:center;display:grid;place-items:center;background:#576fb5;color:white;border:1px solid #a7b7ed87;border-radius:11px;padding:10px;font-size:13px;text-decoration:none}.midi-source-actions .accent{background:#9780d6}
+.midi-source-card .midi-source-note{font-size:12px;color:#b7c3e4}
 </style></head><body><div id="scene"><div id="world"><div class="wall"></div><div class="floor"></div><button class="object" id="piano-object" data-open="piano"><span>🎹 钢琴<br><small>点击弹奏</small></span></button><button class="object" id="orb-object" data-open="orb">✧<br>音律球</button><button class="object" id="lamp-object" data-open="lamp">✦<br>灯光装置</button></div></div><div class="hud"><span class="pill">VEE · MUSIC GALLERY</span><button class="pill" id="resetview">重置视角</button></div><div id="hint">在空白处左右拖动旋转展厅 · 点击物件进入专属视角</div><section id="panel"><div class="paneltop"><button id="back">← 返回展厅</button><h2 id="paneltitle">钢琴</h2></div><div id="pianoView"><div class="piano3d"><div class="case">♫</div></div><div class="landscape-launch"><button class="control" type="button" id="enterLandscape" aria-label="打开横屏钢琴弹奏模式">⛶ 横屏弹奏 · 和我合奏</button><span>平板横过来，整排琴键更好弹；自动演奏与触屏合奏可同时进行。</span></div><div class="settings"><label>音色 <select id="timbre"><option value="sample" selected>原声钢琴（联网音源）</option><option value="piano">拟真钢琴（离线可用）</option><option value="soft">柔和电子琴</option><option value="bright">明亮电子琴</option><option value="pure">纯正弦波</option></select></label><label>八度 <select id="octave"><option value="3">C3–B4</option><option value="4" selected>C4–B5</option><option value="5">C5–B6</option></select></label></div><div id="keys"></div><div class="song-studio" id="songStudio">
   <div class="song-heading"><h3>♫ 曲目演奏 · Piano Player</h3><span class="song-hint">点选曲目，琴键同步演奏</span></div>
   <input class="song-search" id="songSearch" type="search" placeholder="搜索曲名 / 作曲家 / Vee 原创" aria-label="搜索钢琴曲目">
@@ -100,6 +108,8 @@ body.landscape-active #panel{visibility:hidden}
   <div id="stageConsoleHost"></div>
   <div class="stage-tip">可多指同时弹奏 · 自动演奏时，亮起的琴键是哥哥弹的 · 请将平板横过来</div>
 </section>
+
+<div id="midiSourceSheet" role="dialog" aria-modal="true" aria-labelledby="midiSourceTitle" aria-hidden="true"><div class="midi-source-card"><h3 id="midiSourceTitle">获取钢琴 MIDI</h3><p id="midiSourceDescription">先从原始发布页面获取 MIDI 文件，再回来选择文件即可播放。</p><div class="midi-source-actions"><a id="midiSourceLink" target="_blank" rel="noopener noreferrer">① 打开 MIDI 来源</a><button id="midiSourcePick" class="accent" type="button">② 已下载，选择文件</button><button id="midiSourceClose" type="button">返回钢琴</button></div><p class="midi-source-note">下载可能需要原站登录或积分。导入后的乐曲只保存在当前浏览器，不会上传到公开的 GitHub 网站。</p></div></div>
 <script>
 const world=document.getElementById('world');let yaw=-22,pitch=15,drag=null;function orient(){world.style.transform=`translate(-50%,-50%) rotateX(${pitch}deg) rotateY(${yaw}deg)`}document.getElementById('scene').addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={id:e.pointerId,x:e.clientX,y:e.clientY};e.currentTarget.setPointerCapture(e.pointerId)});document.getElementById('scene').addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;yaw+=(e.clientX-drag.x)*.3;pitch=Math.max(-5,Math.min(45,pitch-(e.clientY-drag.y)*.15));drag.x=e.clientX;drag.y=e.clientY;orient()});document.getElementById('scene').addEventListener('pointerup',()=>drag=null);document.getElementById('resetview').onclick=()=>{yaw=-22;pitch=15;orient()};
 const panel=document.getElementById('panel'),views={piano:document.getElementById('pianoView'),orb:document.getElementById('orbView'),lamp:document.getElementById('lampView')};document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{let v=b.dataset.open;panel.classList.add('active');Object.entries(views).forEach(([k,el])=>el.hidden=k!==v);document.getElementById('paneltitle').textContent={piano:'🎹 钢琴视角',orb:'✧ 音律球',lamp:'✦ 灯光装置'}[v]});document.getElementById('back').onclick=()=>{panel.classList.remove('active');stopPerformance();stopAll()};
@@ -253,6 +263,33 @@ document.getElementById('stageImport').onclick=()=>{pendingSlot=null;midiFiles.c
 stageSelect.onchange=()=>{const s=songs.find(x=>x.id===stageSelect.value);if(s)selectAndPlay(s)};
 document.addEventListener('fullscreenchange',()=>{document.getElementById('stageFullscreen').textContent=document.fullscreenElement?'⛶ 退出全屏':'⛶ 全屏'});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('landscape-active'))leaveStage()});
+
+
+// 《爱乐之城》音乐仅提供原作者/发布页链接；用户自行取得后导入本机，不在公开仓库存放 MIDI。
+const lalaMidiSources={
+  lalaland_mia:'https://www.freemidi.org/download3-26056-mai-sebastians-theme-arrangement-la-la-land-movie-themes',
+  lalaland_city:'https://www.midishow.com/en/midi/41056.html',
+  lalaland_epilogue:'https://www.midishow.com/en/midi/la-la-land-epilogue-mid-midi-download-186255'
+};
+const midiSourceSheet=document.getElementById('midiSourceSheet');
+const midiSourceLink=document.getElementById('midiSourceLink');
+let midiSourceSong=null;
+function closeMidiSource(){midiSourceSheet.classList.remove('open');midiSourceSheet.setAttribute('aria-hidden','true');}
+function openMidiSource(song){
+  midiSourceSong=song;
+  document.getElementById('midiSourceTitle').textContent=song.name;
+  const url=lalaMidiSources[song.id];
+  document.getElementById('midiSourceDescription').textContent=url?'你可以在原始页面获取这首钢琴曲的 MIDI。下载后返回这个页面，选择文件就能演奏前一分钟。':'还没有找到可核实的 MIDI 发布页。你拥有对应 MIDI 后，选择本地文件即可演奏。';
+  midiSourceLink.hidden=!url;
+  if(url)midiSourceLink.href=url;
+  if(document.body.classList.contains('landscape-active'))stage.appendChild(midiSourceSheet);else document.body.appendChild(midiSourceSheet);
+  midiSourceSheet.classList.add('open');midiSourceSheet.setAttribute('aria-hidden','false');
+}
+document.getElementById('midiSourceClose').onclick=closeMidiSource;
+midiSourceSheet.addEventListener('click',e=>{if(e.target===midiSourceSheet)closeMidiSource()});
+document.getElementById('midiSourcePick').onclick=()=>{pendingSlot=midiSourceSong;closeMidiSource();midiFiles.click();};
+const originalSelectAndPlay=selectAndPlay;
+selectAndPlay=function(song){if(song.pending&&song.group==='爱乐之城 · 一分钟'){openMidiSource(song);return;}return originalSelectAndPlay(song);};
 
 restoreMidi();refreshLibrary();renderTransport();
 </script></body></html>
