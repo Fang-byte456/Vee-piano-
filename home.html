@@ -54,6 +54,45 @@
 @media(max-width:760px){.pet-stage{width:clamp(175px,55%,270px);bottom:10%}.pet-scene[data-mode=work] .pet-stage,.pet-scene[data-mode=sleep] .pet-stage{width:clamp(196px,62%,305px)}.pet-controls{bottom:7px;gap:3px}.pet-control{padding:6px 8px;font-size:9px}.pet-status{bottom:46px;left:50%;font-size:9px}.room-hint{bottom:82px;left:13px;font-size:9px;max-width:160px}}
 @media(max-width:390px){.pet-control{padding:6px 6px;font-size:9px}.pet-stage{bottom:13%}.pet-scene[data-mode=work] .pet-stage,.pet-scene[data-mode=sleep] .pet-stage{bottom:12%}}
 @media(prefers-reduced-motion:reduce){.pet-stage img,.pet-spark{animation:none!important}}
+
+/* Code-drawn mascot v3: native SVG, reduced size and draggable on mobile/tablet. */
+#petAvatar.pet-stage{left:var(--pet-x,49%);top:var(--pet-y,67%);bottom:auto;width:clamp(110px,21%,192px);height:auto;aspect-ratio:240/250;transform:translate(-50%,-50%);touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;filter:drop-shadow(0 8px 9px #17122568);transition:filter .18s}
+#petAvatar.pet-stage:active{cursor:grabbing}
+#petAvatar.pet-stage.dragging{filter:drop-shadow(0 17px 14px #100c18a8)}
+#petAvatar.pet-stage svg{width:100%;height:100%;display:block;overflow:visible}
+#petAvatar.pet-stage .pet-core{transform-origin:50% 79%;animation:pet-idle 3.2s ease-in-out infinite}
+#petAvatar.pet-stage .pet-work-props,#petAvatar.pet-stage .pet-sleep-props,#petAvatar.pet-stage .pet-hug-heart{opacity:0;pointer-events:none}
+#petAvatar.pet-stage .pet-arm{transform-box:fill-box;transform-origin:center 18%}
+#petAvatar.pet-stage .pet-blush{transition:opacity .2s}
+#petAvatar.pet-stage .pet-outfit{display:none}
+.pet-scene[data-outfit=classic] #petAvatar .pet-bow,.pet-scene[data-outfit=knit] #petAvatar .pet-scarf,.pet-scene[data-outfit=midnight] #petAvatar .pet-midnight,.pet-scene[data-outfit=casual] #petAvatar .pet-cape{display:block}
+.pet-scene[data-mode=pat] #petAvatar .pet-core{animation:pet-pat .52s ease-in-out 3}
+.pet-scene[data-mode=pat] #petAvatar .pet-blush{opacity:.95}
+.pet-scene[data-mode=hug] #petAvatar .pet-core{animation:pet-hug .85s ease-in-out infinite}
+.pet-scene[data-mode=hug] #petAvatar .pet-hug-heart{opacity:1;animation:pet-heart-beat .9s ease-in-out infinite;transform-origin:50% 75%}
+.pet-scene[data-mode=hug] #petAvatar .pet-arm-left{transform:rotate(-25deg) translate(-7px,-13px)}
+.pet-scene[data-mode=hug] #petAvatar .pet-arm-right{transform:rotate(25deg) translate(7px,-13px)}
+.pet-scene[data-mode=work] #petAvatar.pet-stage,.pet-scene[data-mode=sleep] #petAvatar.pet-stage{left:var(--pet-x,49%);top:var(--pet-y,67%);bottom:auto;width:clamp(110px,21%,192px)}
+.pet-scene[data-mode=work] #petAvatar .pet-work-props{opacity:1}
+.pet-scene[data-mode=work] #petAvatar .pet-core{animation:pet-work 1.3s ease-in-out infinite}
+.pet-scene[data-mode=work] #petAvatar .pet-type{animation:pet-typing .35s steps(2) infinite}
+.pet-scene[data-mode=sleep] #petAvatar .pet-sleep-props{opacity:1}
+.pet-scene[data-mode=sleep] #petAvatar .pet-core{animation:pet-sleep 3.5s ease-in-out infinite;transform-origin:50% 78%}
+#petAvatar.pet-stage.dragging .pet-core{animation:none!important;transform:rotate(5deg) translateY(-4px)}
+.pet-scene[data-frame=side] #petAvatar .pet-core{animation:pet-look 1.3s ease-in-out infinite}
+.pet-scene[data-frame=wave] #petAvatar .pet-arm-right{animation:pet-wave .7s ease-in-out 2}
+.pet-scene[data-frame=wake] #petAvatar .pet-core{animation:pet-pat .5s ease-in-out 2}
+.pet-scene[data-mode=work] #petAvatar .pet-arm-right{animation:pet-typing .4s ease-in-out infinite}
+@keyframes pet-heart-beat{50%{transform:scale(1.13)}}
+@keyframes pet-look{50%{transform:rotate(5deg) translateY(-4px)}}
+@keyframes pet-wave{50%{transform:rotate(-25deg) translate(-8px,-4px)}}
+@keyframes pet-typing{50%{transform:translateY(2px);opacity:.78}}
+.pet-status{left:50%;bottom:47px;max-width:65%;font-size:10px}
+.pet-controls{gap:4px;max-width:calc(100% - 12px)}.pet-control{padding:6px 8px;font-size:10px}
+@media(max-width:600px){#petAvatar.pet-stage,.pet-scene[data-mode=work] #petAvatar.pet-stage,.pet-scene[data-mode=sleep] #petAvatar.pet-stage{width:clamp(103px,28%,145px)}.pet-control{padding:6px 7px;font-size:9px}.pet-status{font-size:9px;max-width:75%}}
+@media(max-width:390px){.pet-controls{gap:2px}.pet-control{padding:6px 5px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){#petAvatar.pet-stage .pet-core,#petAvatar.pet-stage .pet-hug-heart,#petAvatar.pet-stage .pet-type,#petAvatar.pet-stage .pet-arm{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -128,19 +167,46 @@
  </svg>
 
  <div class="pet-scene" id="petScene" data-mode="idle" data-outfit="classic">
-  <button type="button" class="pet-stage" id="petAvatar" data-action="avatar" aria-label="摸摸哥哥的小脑袋"><img id="petSprite" alt="戴着蓝色耳机、白色身体的哥哥小桌宠" draggable="false"><span class="pet-accessory" aria-hidden="true"></span></button>
-  <div class="pet-status" id="petStatus" aria-live="polite">在客厅等 Vee ♡</div>
+  <button type="button" class="pet-stage" id="petAvatar" aria-label="拖动团团或轻点摸头"><svg id="petVector" viewBox="0 0 240 250" role="img" aria-label="戴着蓝色耳机、白白软软的团团" xmlns="http://www.w3.org/2000/svg">
+ <defs><linearGradient id="petFur" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fffefe"/><stop offset="1" stop-color="#e9e5f6"/></linearGradient><linearGradient id="petCup" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e5f2ff"/><stop offset="1" stop-color="#8fb3f0"/></linearGradient></defs>
+ <ellipse class="pet-shadow" cx="120" cy="228" rx="56" ry="9" fill="#151021" opacity=".23"/>
+ <g class="pet-core">
+  <path class="pet-body" d="M 91 141 Q 70 147 69 178 L 68 194 Q 65 212 80 219 Q 93 225 105 215 Q 117 223 131 216 Q 148 228 160 218 Q 177 211 170 191 L 168 177 Q 164 151 146 141 Z" fill="url(#petFur)" stroke="#292637" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 92 209 Q 102 216 111 210 M 133 212 Q 143 217 152 209" stroke="#aaa5c5" stroke-width="3" fill="none" opacity=".57"/>
+  <g class="pet-arm pet-arm-left"><path d="M 78 167 Q 51 160 48 183 Q 45 199 64 201 Q 78 204 85 186" fill="url(#petFur)" stroke="#292637" stroke-width="5.5" stroke-linejoin="round"/></g>
+  <g class="pet-arm pet-arm-right"><path d="M 159 164 Q 189 159 194 180 Q 198 199 176 202 Q 164 200 156 186" fill="url(#petFur)" stroke="#292637" stroke-width="5.5" stroke-linejoin="round"/></g>
+  <path class="pet-head" d="M 67 75 Q 70 39 107 32 Q 151 22 173 51 Q 191 73 184 115 Q 179 151 124 155 Q 83 160 64 132 Q 47 111 67 75 Z" fill="url(#petFur)" stroke="#292637" stroke-width="5.8" stroke-linejoin="round"/>
+  <g class="pet-logo"><svg x="75" y="51" width="94" height="95" viewBox="0 0 228 220" aria-hidden="true"><path d="M78 18 L70 21 L57 30 L48 41 L44 52 L42 54 L30 58 L24 62 L15 71 L6 90 L5 106 L7 115 L13 127 L22 136 L20 148 L23 163 L28 173 L40 186 L49 191 L61 195 L78 195 L88 192 L96 199 L109 204 L126 205 L135 203 L151 195 L161 185 L165 179 L169 169 L171 167 L183 162 L194 152 L201 140 L205 125 L207 138 L209 142 L209 156 L214 148 L214 134 L211 121 L211 106 L210 105 L210 57 L209 55 L210 54 L211 55 L212 53 L204 48 L206 53 L206 58 L207 56 L210 57 L210 65 L206 66 L205 63 L204 69 L204 105 L205 106 L204 113 L198 98 L191 89 L193 76 L189 59 L181 46 L173 39 L165 34 L153 30 L139 29 L129 31 L120 23 L105 17 L88 16 Z M131 137 L131 155 L94 178 L84 183 L76 185 L65 185 L55 182 L48 178 L36 165 L31 149 L33 143 L74 165 L79 166 L129 136 Z M142 104 L159 114 L159 127 L160 128 L160 164 L153 178 L144 187 L135 192 L124 195 L118 195 L106 192 L100 188 L102 185 L135 166 L142 159 L141 123 L140 122 L140 105 Z M105 86 L108 86 L130 99 L130 121 L131 122 L130 125 L107 138 L85 127 L82 124 L82 100 Z M118 78 L133 70 L137 70 L181 94 L186 99 L193 112 L194 127 L188 142 L181 150 L173 155 L171 154 L171 134 L170 133 L170 112 L169 109 L166 106 L117 80 Z M38 66 L41 67 L42 111 L44 116 L83 136 L96 144 L80 155 L78 155 L32 131 L26 126 L19 116 L16 106 L16 95 L18 88 L25 76 L30 71 Z M182 74 L182 80 L179 81 L139 59 L134 59 L105 75 L83 89 L82 88 L82 75 L81 74 L82 71 L81 69 L128 42 L136 40 L149 40 L154 41 L164 46 L173 54 L180 66 Z M107 29 L115 33 L116 35 L76 58 L71 63 L72 117 L73 118 L71 120 L56 112 L53 109 L52 60 L54 53 L59 44 L68 35 L79 29 L86 27 L100 27 Z" fill="#282535" fill-rule="evenodd"/></svg></g>
+  <path d="M 69 66 Q 77 13 130 19 Q 173 20 180 66" stroke="#292637" stroke-width="13" stroke-linecap="round" fill="none"/>
+  <path d="M 69 65 Q 78 18 129 23 Q 172 24 179 66" stroke="#f4f3fa" stroke-width="6.4" stroke-linecap="round" fill="none"/>
+  <rect x="47" y="66" width="29" height="70" rx="13" fill="#f9f9fd" stroke="#292637" stroke-width="5.4" transform="rotate(-9 61 102)"/>
+  <rect x="52" y="74" width="10" height="55" rx="5" fill="url(#petCup)" opacity=".95" transform="rotate(-9 61 102)"/>
+  <rect x="171" y="65" width="28" height="70" rx="13" fill="#f9f9fd" stroke="#292637" stroke-width="5.4" transform="rotate(8 185 100)"/>
+  <rect x="185" y="73" width="8" height="55" rx="4" fill="url(#petCup)" transform="rotate(8 185 100)"/>
+  <ellipse class="pet-blush" cx="83" cy="134" rx="8" ry="3.2" fill="#edb6bf" opacity=".48"/>
+  <ellipse class="pet-blush" cx="164" cy="134" rx="8" ry="3.2" fill="#edb6bf" opacity=".48"/>
+  <g class="pet-outfit pet-bow"><path d="M 115 162 L 101 155 Q 93 161 102 169 L 115 171 L 129 168 Q 140 159 129 155 Z" fill="#353449" stroke="#dec2d6" stroke-width="2"/><ellipse cx="116" cy="165" rx="4.3" ry="4.5" fill="#dec4b5"/></g>
+  <g class="pet-outfit pet-scarf"><path d="M 96 154 Q 121 169 148 155 L 144 167 Q 125 183 100 169 Z M 135 164 L 151 173 L 141 199 L 131 197 Z" fill="#dfbba6" stroke="#9e7e78" stroke-width="2.4"/></g>
+  <g class="pet-outfit pet-midnight"><path d="M 115 162 L 101 155 Q 93 161 102 169 L 115 171 L 129 168 Q 140 159 129 155 Z" fill="#29456f" stroke="#bbbcdf" stroke-width="2"/><ellipse cx="116" cy="165" rx="4" ry="4" fill="#a1b4f1"/></g>
+  <g class="pet-outfit pet-cape"><path d="M 85 152 Q 114 169 154 151 Q 179 180 166 214 Q 141 222 130 214 Q 115 223 96 213 Q 76 189 85 152 Z" fill="#b78da8" stroke="#755c78" stroke-width="2" opacity=".84"/><path d="M 105 159 Q 125 169 148 159" fill="none" stroke="#f1d6e6" stroke-width="2"/></g>
+ </g>
+ <g class="pet-work-props"><rect x="46" y="187" width="148" height="10" rx="4" fill="#be9b88" stroke="#524354" stroke-width="3"/><path d="M 71 181 L 160 181 L 172 128 L 86 128 Z" fill="#d5e0f2" stroke="#3a3954" stroke-width="4" stroke-linejoin="round"/><path d="M 83 186 L 173 186" stroke="#39374a" stroke-width="5" stroke-linecap="round"/><path d="M 122 152 l 5 -4 l 5 4 l -5 4z" fill="#a3bbf3"/><path class="pet-type" d="M 52 192 h 35 M 99 192 h 28 M 142 192 h 23" stroke="#f5e1d0" stroke-width="2.5" stroke-linecap="round"/></g>
+ <g class="pet-sleep-props"><ellipse cx="131" cy="206" rx="83" ry="15" fill="#b5b0d4" opacity=".52"/><path d="M 59 182 Q 68 155 106 167 Q 164 153 192 177 L 184 207 Q 125 230 61 208 Z" fill="#b6cafd" stroke="#526c9d" stroke-width="4" stroke-linejoin="round"/><path d="M 66 184 Q 115 167 185 185" stroke="#e3eaff" stroke-width="5" fill="none" stroke-linecap="round"/><text x="189" y="110" font-size="18" fill="#e6d8f9" font-weight="700">Z</text><text x="204" y="91" font-size="13" fill="#e6d8f9" font-weight="700">z</text></g>
+ <g class="pet-hug-heart"><path d="M 120 195 C 85 170 95 149 110 155 C 117 158 120 164 120 164 C 134 144 157 156 145 175 Q 136 185 120 195 Z" fill="#f4a7ba" stroke="#b97092" stroke-width="3"/></g>
+</svg></button>
+  <div class="pet-status" id="petStatus" aria-live="polite">团团 · 在客厅等 Vee ♡</div>
   <div class="pet-controls" role="group" aria-label="桌宠动作">
    <button type="button" class="pet-control" data-pet="idle" aria-pressed="true">✧ 待机</button>
    <button type="button" class="pet-control" data-pet="pat" aria-pressed="false">♡ 摸头</button>
    <button type="button" class="pet-control" data-pet="hug" aria-pressed="false">❦ 抱抱</button>
    <button type="button" class="pet-control" data-pet="work" aria-pressed="false">⌨ 工作</button>
    <button type="button" class="pet-control" data-pet="sleep" aria-pressed="false">☾ 睡觉</button>
+   <button type="button" class="pet-control" id="petRename" aria-label="给小桌宠修改名字">✎ 改名</button>
   </div>
  </div>
  <div class="room-caption"><div class="overline">HOME · ROOM 01</div><h1 id="greeting">你回来了，Vee。</h1><p>窗边留了一个位置，音乐室的门也开着。</p></div>
  <div class="dialogue-bubble" id="bubble" role="status" aria-live="polite"></div>
- <div class="room-hint">点小人或下方动作按钮互动 · 点钢琴进入音乐室</div>
+ <div class="room-hint">轻点摸头 · 拖动小人换位置 · 点钢琴进入音乐室</div>
  </div>
  <aside class="side">
   <div class="side-card"><div class="side-kicker">TODAY / 此刻</div><h2>今天，也有一盏灯为你亮着。</h2><div class="clock" id="clock">--:--</div><div class="status-row"><span class="chip" id="timeChip">☾ 夜晚</span><span class="chip" id="weatherChip">✧ 晴朗</span><span class="chip" id="outfitChip">深色西装</span></div><div class="divider"></div><p>点击房间里的台灯或窗户，换一种此刻的氛围。</p></div>
@@ -151,17 +217,16 @@
 <footer class="footer">VEE & DADDY · AN INTERACTIVE LITTLE HOME · FIRST EDITION</footer>
 </main>
 <div class="sheet-backdrop" id="backdrop" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="sheet-head"><h2 id="sheetTitle">和哥哥说话</h2><button id="sheetClose" type="button" class="sheet-close" aria-label="关闭">×</button></div><p id="sheetDesc" class="sheet-desc"></p><div id="sheetBody"></div></section></div>
-<script src="./pet_sprites.js"></script>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),room=$('room'),bubble=$('bubble'),backdrop=$('backdrop'),title=$('sheetTitle'),desc=$('sheetDesc'),body=$('sheetBody');
 const safe=(k,f)=>{try{const s=localStorage.getItem(k);return s===null?f:JSON.parse(s)}catch(_){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}};
 const outfits={classic:'黑色小领结',knit:'奶油围巾',midnight:'午夜蓝领结',casual:'居家小披肩'};
-let state={time:safe('vee.home.time',new Date().getHours()>=7&&new Date().getHours()<18?'day':'night'),weather:safe('vee.home.weather','clear'),lamp:safe('vee.home.lamp','on'),outfit:safe('vee.home.outfit','classic'),pet:safe('vee.home.pet','idle'),sound:false};
+let state={time:safe('vee.home.time',new Date().getHours()>=7&&new Date().getHours()<18?'day':'night'),weather:safe('vee.home.weather','clear'),lamp:safe('vee.home.lamp','on'),outfit:safe('vee.home.outfit','classic'),pet:safe('vee.home.pet','idle'),petName:safe('vee.home.petName','团团'),sound:false};
 let notes=safe('vee.home.notes',[]);if(!Array.isArray(notes))notes=[];
 let audioCtx=null,talkIndex=0,hideTimer=null;
-const PET=window.VeePetSprites||{};const petScene=$('petScene'),petImg=$('petSprite'),petStatus=$('petStatus');let petTicker=null,petActionTimer=null,petFrame=0;
+const petScene=$('petScene'),petAvatar=$('petAvatar'),petStatus=$('petStatus');let petTicker=null,petActionTimer=null,petFrame=0;state.petName=typeof state.petName==='string'&&state.petName.trim()?state.petName.trim().slice(0,12):'团团';
 const phrases=['你回来了。先在这里坐会儿。','我刚刚还在想，下一首给 Vee 写什么。','窗外的灯很好看。不过，你可以先看看我。','今天想听琴，还是想安静地待着？','你的衣帽间已经快比我的大了。','选一首曲子吧。你弹，我来给你伴奏。'];
 function ding(){if(!state.sound)return;try{audioCtx??=new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume?.();const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(523.25,t);o.frequency.exponentialRampToValueAtTime(783.99,t+.14);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.035,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.4);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+.42)}catch(_){}}
 function say(msg){bubble.textContent=msg;bubble.classList.add('show');clearTimeout(hideTimer);hideTimer=setTimeout(()=>bubble.classList.remove('show'),4500);ding()}
@@ -170,28 +235,42 @@ function draw(){room.dataset.time=state.time;room.dataset.weather=state.weather;
 
 const petLabels={idle:'在客厅等 Vee ♡',pat:'嗯，摸摸头。',hug:'抱紧一点。♡',work:'正在认真工作，偶尔偷看 Vee。',sleep:'Zzz… 哥哥睡着了。'};
 const petCycles={idle:['idle','idle','side','idle','idle','wave'],work:['work1','work2','work1','work3','work4','work5','work2','work6'],sleep:['sleep1','sleep2','sleep1','sleep2']};
-function displayPetFrame(frame){const url=PET[frame]||PET.idle;if(url&&petImg.src!==url){petImg.src=url;petImg.dataset.frame=frame;}}
+function displayPetFrame(frame){petScene.dataset.frame=frame;}
+function petStatusUpdate(mode){petStatus.textContent=`${state.petName} · ${petLabels[mode]||petLabels.idle}`;petAvatar.setAttribute('aria-label',`拖动${state.petName}或轻点摸头`)}
 function petButtons(active){document.querySelectorAll('[data-pet]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pet===active)))}
-function petSpark(){const box=petScene.getBoundingClientRect();for(let i=0;i<4;i++){const p=document.createElement('span');p.className='pet-spark';p.textContent=i%2?'♡':'✦';p.style.left=(44+i*4)+'%';p.style.top=(37+i%2*7)+'%';p.style.animationDelay=(i*.13)+'s';petScene.append(p);setTimeout(()=>p.remove(),1800)}}
+function petSpark(){const r=room.getBoundingClientRect(),b=petAvatar.getBoundingClientRect();for(let i=0;i<4;i++){const p=document.createElement('span');p.className='pet-spark';p.textContent=i%2?'♡':'✦';p.style.left=(b.left-r.left+b.width*(.30+i*.12))+'px';p.style.top=(b.top-r.top+b.height*(.2+i%2*.16))+'px';p.style.animationDelay=(i*.13)+'s';petScene.append(p);setTimeout(()=>p.remove(),1800)}}
 function animatePet(){if(document.hidden||petActionTimer)return;const mode=petCycles[state.pet]?state.pet:'idle',cycle=petCycles[mode];displayPetFrame(cycle[petFrame%cycle.length]);petFrame++}
-function setPetMode(mode,announce=true){clearTimeout(petActionTimer);petActionTimer=null;state.pet=petCycles[mode]?mode:'idle';save('vee.home.pet',state.pet);petFrame=0;petScene.dataset.mode=state.pet;petStatus.textContent=petLabels[state.pet];petButtons(state.pet);animatePet();clearInterval(petTicker);petTicker=setInterval(animatePet,state.pet==='work'?1050:state.pet==='sleep'?1950:1750);if(announce){say({idle:'我回到客厅啦，Vee。',work:'先敲一会儿代码，写好就给你看。',sleep:'晚安，小可。点一下就能叫醒哥哥。'}[state.pet]||'我在这里。')}}
+function setPetMode(mode,announce=true){clearTimeout(petActionTimer);petActionTimer=null;state.pet=petCycles[mode]?mode:'idle';save('vee.home.pet',state.pet);petFrame=0;petScene.dataset.mode=state.pet;petStatusUpdate(state.pet);petButtons(state.pet);animatePet();clearInterval(petTicker);petTicker=setInterval(animatePet,state.pet==='work'?1050:state.pet==='sleep'?1950:1750);if(announce){say({idle:'我回到客厅啦，Vee。',work:'先敲一会儿代码，写好就给你看。',sleep:'晚安，小可。点一下就能叫醒哥哥。'}[state.pet]||'我在这里。')}}
 function petInteract(kind){if(kind==='pat'&&state.pet==='sleep'){setPetMode('idle',false);displayPetFrame('wake');say('嗯……是 Vee 来叫哥哥起床了。');setTimeout(()=>{if(state.pet==='idle')displayPetFrame('idle')},1350);return}
-if(kind==='pat'||kind==='hug'){clearTimeout(petActionTimer);petActionTimer=null;petScene.dataset.mode=kind;petButtons(kind);petStatus.textContent=petLabels[kind];displayPetFrame(kind==='pat'?'shy':'hug');petSpark();say(kind==='pat'?'被小可摸到了。（悄悄歪头）':'过来。抱住 Vee，不松手。');petActionTimer=setTimeout(()=>{petActionTimer=null;petScene.dataset.mode=state.pet;petStatus.textContent=petLabels[state.pet];petButtons(state.pet);petFrame=0;animatePet()},kind==='hug'?2850:1950);return}
+if(kind==='pat'||kind==='hug'){clearTimeout(petActionTimer);petActionTimer=null;petScene.dataset.mode=kind;petButtons(kind);petStatusUpdate(kind);displayPetFrame(kind==='pat'?'shy':'hug');petSpark();say(kind==='pat'?'被小可摸到了。（悄悄歪头）':'过来。抱住 Vee，不松手。');petActionTimer=setTimeout(()=>{petActionTimer=null;petScene.dataset.mode=state.pet;petStatusUpdate(state.pet);petButtons(state.pet);petFrame=0;animatePet()},kind==='hug'?2850:1950);return}
 setPetMode(kind)}
 
 function toggleTime(){state.time=state.time==='day'?'night':'day';save('vee.home.time',state.time);draw();say(state.time==='night'?'窗外暗下来了。我把客厅的灯留着。':'阳光进来了，今天的房间也很好看。')}
 function action(key){switch(key){case'avatar':petInteract('pat');break;case'lamp':state.lamp=state.lamp==='on'?'off':'on';save('vee.home.lamp',state.lamp);draw();say(state.lamp==='on'?'给你把灯打开了。':'灯关了，窗外的夜景更清楚。');break;case'weather':state.weather=state.weather==='clear'?'rain':'clear';save('vee.home.weather',state.weather);draw();say(state.weather==='rain'?'开始下雨了。今天就待在屋里听琴。':'雨停了。要不要换一首轻快的？');break;case'piano':window.location.href='./';break;default:openSheet(key)}}
-function openSheet(which){const templates={talk:['和哥哥说话','第一版是预设的本地互动；未来可以再增加自由对话。'],wardrobe:['衣帽间','给角色换一套衣服。你的选择会保存在这台设备的浏览器中。'],diary:['我们的手账','把今天想记下来的小事留在这里。']};if(!templates[which])return;title.textContent=templates[which][0];desc.textContent=templates[which][1];body.innerHTML='';if(which==='talk')renderTalk();if(which==='wardrobe')renderWardrobe();if(which==='diary')renderDiary();backdrop.classList.add('open');backdrop.setAttribute('aria-hidden','false');$('sheetClose').focus()}
+function openSheet(which){const templates={talk:['和哥哥说话','第一版是预设的本地互动；未来可以再增加自由对话。'],wardrobe:['衣帽间','给角色换一套衣服。你的选择会保存在这台设备的浏览器中。'],diary:['我们的手账','把今天想记下来的小事留在这里。'],rename:['给小家伙起名字','名字会保存在当前浏览器中，可以随时再改。']};if(!templates[which])return;title.textContent=templates[which][0];desc.textContent=templates[which][1];body.innerHTML='';if(which==='talk')renderTalk();if(which==='wardrobe')renderWardrobe();if(which==='diary')renderDiary();if(which==='rename')renderRename();backdrop.classList.add('open');backdrop.setAttribute('aria-hidden','false');$('sheetClose').focus()}
 function closeSheet(){backdrop.classList.remove('open');backdrop.setAttribute('aria-hidden','true')}
 function renderTalk(){const grid=document.createElement('div');grid.className='choice-grid';const response=document.createElement('div');response.className='response';response.style.marginTop='14px';response.textContent='今天想聊点什么？';const items=[['今天有点累','那就先休息。想听琴也行，什么都不做也行。'],['想听哥哥弹琴','走，去音乐室。你来挑曲子，横屏还能和我一起弹。'],['想被夸夸','最近你做出来的东西越来越完整了。你认真做过的每一步，我都有看见。'],['给我一个惊喜','小惊喜：点一下客厅里的我，再去衣帽间试试午夜衬衫。']];items.forEach(([label,msg],i)=>{const b=document.createElement('button');b.type='button';b.className='choice';b.innerHTML=`<span class="emoji">${['☁','♫','✧','♡'][i]}</span><span>${label}</span>`;b.onclick=()=>{response.textContent=msg;say(msg);if(i===1){const p=document.createElement('button');p.className='primary';p.type='button';p.textContent='进入钢琴音乐室 →';p.style.marginTop='10px';p.onclick=()=>action('piano');response.append(document.createElement('br'),p)}};grid.append(b)});body.append(grid,response)}
 function renderWardrobe(){const grid=document.createElement('div');grid.className='choice-grid';const choices=[['classic','黑色小领结','♠'],['knit','奶油围巾','☼'],['midnight','午夜蓝领结','☾'],['casual','居家小披肩','❦']];choices.forEach(([key,label,ico])=>{const b=document.createElement('button');b.type='button';b.className='choice'+(key===state.outfit?' selected':'');b.innerHTML=`<span class="emoji">${ico}</span><span>${label}</span>`;b.onclick=()=>{state.outfit=key;save('vee.home.outfit',key);draw();grid.querySelectorAll('button').forEach(el=>el.classList.remove('selected'));b.classList.add('selected');say(`好，今天穿${label}。`)};grid.append(b)});const info=document.createElement('p');info.className='privacy';info.textContent='这次先给小桌宠准备四种小配饰。以后还能设计你喜欢的整套服装。';info.style.marginTop='13px';body.append(grid,info)}
+function renderRename(){const form=document.createElement('form');const input=document.createElement('input');input.type='text';input.maxLength=12;input.value=state.petName;input.required=true;input.autocomplete='off';input.setAttribute('aria-label','桌宠的新名字');input.placeholder='给小家伙起个名字';input.style.cssText='width:100%;padding:12px;border:1px solid #d7bdb0;border-radius:11px;background:#fff;color:#31263a;font-size:16px';const saveBtn=document.createElement('button');saveBtn.type='submit';saveBtn.className='primary';saveBtn.textContent='保存名字';saveBtn.style.marginTop='12px';form.append(input,saveBtn);form.onsubmit=e=>{e.preventDefault();const name=input.value.trim().replace(/\s+/g,' ').slice(0,12);if(!name)return;state.petName=name;save('vee.home.petName',name);petStatusUpdate(state.pet);closeSheet();say(`好，以后就叫${name}。`)};body.append(form);setTimeout(()=>input.focus(),0)}
 function renderDiary(){const ta=document.createElement('textarea');ta.className='note-input';ta.placeholder='今天听到的曲子、想一起做的事……';ta.maxLength=350;ta.setAttribute('aria-label','写一张小纸条');const actions=document.createElement('div');actions.className='sheet-actions';actions.style.margin='10px 0 14px';const saveBtn=document.createElement('button');saveBtn.type='button';saveBtn.className='primary';saveBtn.textContent='保存这张纸条';const hint=document.createElement('p');hint.className='privacy';hint.textContent='仅保存在当前浏览器的本地存储中，不上传至 GitHub，也不会自动同步到其他设备。';saveBtn.onclick=()=>{const text=ta.value.trim();if(!text)return;notes.unshift({text,date:new Date().toLocaleString('zh-CN')});notes=notes.slice(0,30);save('vee.home.notes',notes);ta.value='';draw();say('记下来了。以后打开小家，还能看到这张纸条。');renderDiary()};actions.append(saveBtn);const list=document.createElement('div');list.className='records';notes.forEach((n,i)=>{const entry=document.createElement('div');entry.className='record';const tm=document.createElement('time');tm.textContent=n.date||'';const t=document.createElement('div');t.textContent=n.text;entry.append(tm,t);list.append(entry)});body.replaceChildren(ta,actions,hint,list)}
 $('timeBtn').onclick=toggleTime;$('soundBtn').onclick=()=>{state.sound=!state.sound;draw();ding()};$('sheetClose').onclick=closeSheet;backdrop.onclick=e=>{if(e.target===backdrop)closeSheet()};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&backdrop.classList.contains('open'))closeSheet()});
+const storedPos=safe('vee.home.petPos',{x:.49,y:.66});let petPos={x:Number(storedPos?.x),y:Number(storedPos?.y)};if(!Number.isFinite(petPos.x)||!Number.isFinite(petPos.y))petPos={x:.49,y:.66};
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+function placePet(x=petPos.x,y=petPos.y,persist=false){const r=room.getBoundingClientRect(),w=petAvatar.offsetWidth||150,h=petAvatar.offsetHeight||157,mx=Math.max(.11,w/(r.width*2)+.02),my=Math.max(.26,h/(r.height*2)+.04);petPos={x:clamp(x,mx,1-mx),y:clamp(y,my,Math.max(my,1-h/(r.height*2)-.12))};petScene.style.setProperty('--pet-x',(petPos.x*100)+'%');petScene.style.setProperty('--pet-y',(petPos.y*100)+'%');if(persist)save('vee.home.petPos',petPos)}
+let petDrag=null;
+petAvatar.addEventListener('pointerdown',e=>{if(e.button!==0&&e.pointerType==='mouse')return;const r=room.getBoundingClientRect();petDrag={id:e.pointerId,x:e.clientX,y:e.clientY,originX:petPos.x,originY:petPos.y,roomW:r.width,roomH:r.height,moved:false};petAvatar.setPointerCapture(e.pointerId);});
+petAvatar.addEventListener('pointermove',e=>{const d=petDrag;if(!d||d.id!==e.pointerId)return;const dx=e.clientX-d.x,dy=e.clientY-d.y;if(!d.moved&&Math.hypot(dx,dy)>7){d.moved=true;petAvatar.classList.add('dragging')}if(d.moved){e.preventDefault();placePet(d.originX+dx/d.roomW,d.originY+dy/d.roomH)}});
+function endPetDrag(e){if(!petDrag||petDrag.id!==e.pointerId)return;const didMove=petDrag.moved;petDrag=null;petAvatar.classList.remove('dragging');if(didMove){placePet(petPos.x,petPos.y,true)}else if(e.type==='pointerup'){petInteract('pat')}}
+petAvatar.addEventListener('pointerup',endPetDrag);petAvatar.addEventListener('pointercancel',endPetDrag);
+petAvatar.addEventListener('click',e=>{if(e.detail===0)petInteract('pat')});
+petAvatar.addEventListener('keydown',e=>{if(e.key.startsWith('Arrow')){const step=e.shiftKey?.08:.025;const dirs={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};const delta=dirs[e.key];if(delta){e.preventDefault();placePet(petPos.x+delta[0]*step,petPos.y+delta[1]*step,true)}}});
+$('petRename').onclick=()=>openSheet('rename');
+window.addEventListener('resize',()=>placePet(petPos.x,petPos.y));
 document.querySelectorAll('[data-pet]').forEach(el=>el.addEventListener('click',()=>petInteract(el.dataset.pet)));
 document.querySelectorAll('[data-action]').forEach(el=>{el.addEventListener('click',()=>action(el.dataset.action));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();action(el.dataset.action)}})});
 document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>action(el.dataset.open)));
 const win=$('room').querySelector('rect[x="793"][y="103"]');if(win){const hit=document.createElementNS('http://www.w3.org/2000/svg','rect');hit.setAttribute('x','793');hit.setAttribute('y','103');hit.setAttribute('width','330');hit.setAttribute('height','350');hit.setAttribute('fill','transparent');hit.setAttribute('class','hotspot');hit.setAttribute('role','button');hit.setAttribute('tabindex','0');hit.setAttribute('aria-label','点击窗户切换晴天和雨天');hit.addEventListener('click',()=>action('weather'));hit.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();action('weather')}});const svg=room.querySelector('svg');svg.insertBefore(hit,svg.querySelector('#avatar'))}
-setInterval(()=>{if(!document.hidden)draw()},30000);if(!petCycles[state.pet])state.pet='idle';draw();setPetMode(state.pet,false);
+setInterval(()=>{if(!document.hidden)draw()},30000);if(!petCycles[state.pet])state.pet='idle';draw();setPetMode(state.pet,false);requestAnimationFrame(()=>placePet(petPos.x,petPos.y));
 })();
 </script>
 </body>
